@@ -7,7 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,6 +19,15 @@ import org.springframework.stereotype.Repository;
 public class TemperatureDAO {
 	@Autowired
 	private DataSource dataSource;
+	@PersistenceContext
+	EntityManager entityManager;
+	
+	@Transactional
+    public Temperature findWithEM() {
+        // jakieś operacje z EntityManagerem ...
+		Temperature temperature = entityManager.find(Temperature.class, 1L);
+		return temperature;
+    }
 
 	private Temperature temperature;
 	public Temperature getTemperature(){

@@ -30,6 +30,7 @@ public class WebController {
 	public String displayResult(Model model){
 		model.addAttribute("temperatureResult",temperatureDAO.getTemperature().getTemperatureF());
 		model.addAttribute("temperatureList",temperatureDAO.temperatureListAll());
+		model.addAttribute("temperatureFromEntityManager",temperatureDAO.findWithEM().getTemperatureC());
 		return "result";
 	}
 }
