@@ -7,6 +7,8 @@
 </head>
 <body>
 <h2>Hello World!</h2>
+<p>
 <a href="<c:url value="welcome"/>">Go to Temperature converter</a>
+</p>
 </body>
 </html>
