@@ -11,5 +11,8 @@
 	<p>This is your result temperature in Fahrenheit</p>
 	<p>${temperatureResult}</p>
 	<a href="<c:url value="welcome"/>" >Back to Welcome page.</a>
+	<p>Previous results</p>
+	<c:forEach items="${temperatureList}" var="item"> ${item.temperatureC} : ${item.temperatureF}<br /></c:forEach>
+	<p>THE END</p>
 </body>
 </html>

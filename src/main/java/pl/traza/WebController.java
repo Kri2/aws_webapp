@@ -29,6 +29,7 @@ public class WebController {
 	@RequestMapping(value="/result")
 	public String displayResult(Model model){
 		model.addAttribute("temperatureResult",temperatureDAO.getTemperature().getTemperatureF());
+		model.addAttribute("temperatureList",temperatureDAO.temperatureListAll());
 		return "result";
 	}
 }
