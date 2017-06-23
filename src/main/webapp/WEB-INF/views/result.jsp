@@ -9,12 +9,15 @@
 </head>
 <body>
 	<p>This is your result temperature in Fahrenheit</p>
-	<p>${temperatureResult}</p>
+	<p>${temperatureResult.temperatureF}</p>
 	<a href="<c:url value="welcome"/>" >Back to Welcome page.</a>
 	<p>Previous results</p>
+	<c:forEach items="${previousResults}" var="item">${item.temperatureC} : ${item.temperatureF}<br /></c:forEach>
+	
+<!--  	
 	<c:forEach items="${temperatureList}" var="item"> ${item.temperatureC} : ${item.temperatureF}<br /></c:forEach>
 	<p>This is from Entity Manager: </p>
-	<p>${temperatureFromEntityManager}</p>
+	<p>${temperatureFromEntityManager}</p> -->
 	<p>THE END</p>
 </body>
 </html>

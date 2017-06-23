@@ -1,4 +1,6 @@
 package pl.traza;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,14 +25,18 @@ public class WebController {
 		temperature.setTemperatureC(temperatureFromForm.getTemperatureC());
 		//that would be on the same page i quess
 		//model.addAttribute("temperatureResult", temperature.getTemperatureF());
-		temperatureDAO.setTemperature(temperature);
+		temperatureDAO.save(temperature);
 		return "redirect:/result";
 	}
 	@RequestMapping(value="/result")
 	public String displayResult(Model model){
-		model.addAttribute("temperatureResult",temperatureDAO.getTemperature().getTemperatureF());
-		model.addAttribute("temperatureList",temperatureDAO.temperatureListAll());
-		model.addAttribute("temperatureFromEntityManager",temperatureDAO.findWithEM().getTemperatureC());
+		Iterable<Temperature> allRecords = temperatureDAO.findAll();
+		Long dbSize = temperatureDAO.count();
+		model.addAttribute("temperatureResult",temperatureDAO.findById(dbSize));
+		model.addAttribute("previousResults", allRecords);
+		//model.addAttribute("temperatureResult",temperatureDAO.getTemperature().getTemperatureF());
+		//model.model.addAttribute("temperatureList",temperatureDAO.temperatureListAll());
+		//model.addAttribute("temperatureFromEntityManager",temperatureDAO.findWithEM().getTemperatureC());
 		return "result";
 	}
 }
