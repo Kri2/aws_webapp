@@ -1,4 +1,6 @@
 package pl.traza;
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +20,18 @@ public class WebController {
 		return "welcome";
 	}
 	@RequestMapping(value="/welcome", method=RequestMethod.POST)
-	public String processForm(@ModelAttribute("temperatureForm") Temperature temperatureFromForm, BindingResult result, Model model){
-		Temperature temperature = new Temperature();
-		temperature.setTemperatureC(temperatureFromForm.getTemperatureC());
-		//that would be on the same page i quess
-		//model.addAttribute("temperatureResult", temperature.getTemperatureF());
-		temperatureDAO.setTemperature(temperature);
-		return "redirect:/result";
+	public String processForm(@ModelAttribute("temperatureForm") @Valid TemperatureFormDTO temperatureFromFormDTO, BindingResult result, Model model){
+		if(result.hasErrors()){
+			return "welcome";
+		}
+		else{
+			Temperature temperature = new Temperature();
+			temperature.setTemperatureC(temperatureFromFormDTO.getTemperatureC());
+			//that would be on the same page i quess
+			//model.addAttribute("temperatureResult", temperature.getTemperatureF());
+			temperatureDAO.setTemperature(temperature);
+			return "redirect:/result";
+		}
 	}
 	@RequestMapping(value="/result")
 	public String displayResult(Model model){

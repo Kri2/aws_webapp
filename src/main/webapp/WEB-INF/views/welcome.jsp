@@ -8,6 +8,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Welcome to my page</title>
 <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<style>
+.error{
+	color: #f49842;
+	font-size: 0.8em;
+}
+.errorBlock{
+	color: #f49842;
+	font-size: 0.8em;
+	padding: 8px;
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -15,7 +26,12 @@
 <p>Type in temperature in Celsius</p>
 <form:form method="POST" modelAttribute="temperatureForm">
 	<form:input type="text" path="temperatureC" />
-	
+	<input type="submit" value="calculate" />
+	<c:if test="${pageContext.request.method=='POST'}"><!-- without this shows error also on first load -->
+		<!--  
+		<form:errors path="temperatureC" cssClass="error" /><!-- can put it somewhere else, can use path="*" -->
+		<form:errors path="*" cssClass="errorBlock" element="div" />
+	</c:if>
 </form:form>
 <script src="webjars/jquery/3.2.1/jquery.min.js"></script>
 <script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
