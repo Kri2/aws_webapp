@@ -26,7 +26,7 @@ public class WebController {
 		}
 		else{
 			Temperature temperature = new Temperature();
-			temperature.setTemperatureC(temperatureFromFormDTO.getTemperatureC());
+			temperature.setTemperatureC(Float.parseFloat(temperatureFromFormDTO.getTemperatureC()));
 			//that would be on the same page i quess
 			//model.addAttribute("temperatureResult", temperature.getTemperatureF());
 			temperatureDAO.setTemperature(temperature);

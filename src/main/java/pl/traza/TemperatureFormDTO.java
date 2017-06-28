@@ -1,19 +1,20 @@
 package pl.traza;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
-import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.NotEmpty;
 
 public class TemperatureFormDTO {
 	//later change to string and do regex
-	@NotNull(message="Type in the temperature value.")
-	@Range(min=-274, max=10000, message="type in temperature (-273 to 10000)")
-	private Float temperatureC;
+	@NotEmpty(message="Type in the temperature value.")
+	//@Pattern(regexp="[-+]?[0-9]+[\\.]?[0-9]?", message="only numbers please")
+	@Pattern(regexp="[-+]?[0-9]*\\.?[0-9]+", message="only numbers please")
+	private String temperatureC;
 	//private Float temperatureF;
-	public void setTemperatureC(Float temperatureC){
-		this.temperatureC = temperatureC;
+	public void setTemperatureC(String temperatureC){
+		this.temperatureC = temperatureC.trim();
 	}
-	public Float getTemperatureC(){
+	public String getTemperatureC(){
 		return this.temperatureC;
 	}
 	//public void setTemperatureF(Float temperatureF){
